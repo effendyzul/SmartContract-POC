@@ -1,0 +1,16 @@
+npm install web3 ethers
+import Web3 from 'web3';
+
+const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
+export default web3;
+import web3 from './web3';
+import InsuranceClaims from './InsuranceClaims.json';
+
+const address = '0xYourSmartContractAddress';
+const contract = new web3.eth.Contract(InsuranceClaims.abi, address);
+
+// Submit a claim
+async function submitClaim(policyID, claimAmount) {
+  const accounts = await web3.eth.getAccounts();
+  await contract.methods.submitClaim(policyID, claimAmount).send({ from: accounts[0] });
+}
