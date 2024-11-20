@@ -1,0 +1,12 @@
+/blockchain-insurance-poc
+    /contracts
+        InsuranceClaims.sol
+    /frontend
+        /src
+            App.js
+            web3.js
+    /tests
+        InsuranceClaims.test.js
+    /migrations
+        1_deploy_contracts.js
+    truffle-config.js
