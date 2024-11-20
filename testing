@@ -1,0 +1,17 @@
+const InsuranceClaims = artifacts.require("InsuranceClaims");
+
+contract("InsuranceClaims", (accounts) => {
+  it("should add a new policy", async () => {
+    const instance = await InsuranceClaims.deployed();
+    await instance.addPolicy(accounts[0], 1, 1000);
+    const policy = await instance.policies(1);
+    assert.equal(policy.policyHolder, accounts[0], "Policy holder is incorrect");
+  });
+
+  it("should submit a new claim", async () => {
+    const instance = await InsuranceClaims.deployed();
+    await instance.submitClaim(1, 500);
+    const claim = await instance.claims(1);
+    assert.equal(claim.status, "Pending", "Claim status is incorrect");
+  });
+});
